@@ -1,10 +1,41 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from models import FormPost, PostingForm, LoginForm, Login
+from models import FormPost, PostingForm, LoginForm, Login, RegisterForm
 import requests
 import json
-from Rabbit.rabbit import RabbitMq
 from django.template import loader, Context, RequestContext
+
+def register_post(request):
+
+    register_message = ""
+
+    if request.method == 'POST':
+        register = RegisterForm(request.POST)
+        username = requests.post.get('username')
+        password = requests.post.get('password')
+
+        if register.is_valid():
+            url = 'http://127.0.0.1:5000/register/'
+            the_data = {'username': username, 'password': password}
+
+            r = requests.post(url, data=the_data)
+            status = r.status_code
+            the_text = r.text
+
+            the_data = json.loads(r.text)
+
+            if 'success' in the_data:
+                if the_data['success'] == 'True':
+                    request.session['user_id'] = the_data['user_id']
+                    return HttpResponseRedirect('/form/')
+                elif the_data['success'] == 'False':
+                    register_message = the_data['message']
+                else:
+                    register_message = "There was an unknown error"
+            else:
+                register_message = "There was an unknown error"
+    else:
+        register = RegisterForm()
 
 def form_post(request):
 
