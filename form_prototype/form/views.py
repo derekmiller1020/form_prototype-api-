@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from models import FormPost, PostingForm, LoginForm, Login
+import requests
+import json
 from Rabbit.rabbit import RabbitMq
 from django.template import loader, Context, RequestContext
 
@@ -26,30 +28,34 @@ def login_post(request):
         login = LoginForm(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
+
         if login.is_valid():
 
-            the_data = {'username': username, 'password': password}
-            RabbitMq(the_data)
+            url = "http://127.0.0.1:5000/login/"
+            the_data = {'username': str(username), 'password': str(password)}
 
-            number = Login.objects.filter(username=username).count()
-            if number != 1:
-                username_message = 'Your username was not found'
-            else:
-                username_message = ''
+            r = requests.post(url, data=the_data)
+            status = r.status_code
+            the_text = r.text
 
-            pass_find_it = Login.objects.filter(username=username, password=password).count()
+            username_message = str(r.text)
 
-            if pass_find_it == 1:
-                the_pass = Login.objects.get(username=username, password=password)
-                if password != the_pass.password:
-                    password_message = 'your password does not match'
+            the_data = json.loads(r.text)
+
+            if the_data['success'] == 'True':
+                request.session['user_id'] = the_data['user_id']
+                return HttpResponseRedirect('/form/')
+
+            elif the_data['success'] == 'False':
+                if 'username_message' in the_data:
+                    username_message = the_data['username_message']
                 else:
-                    request.session['unique_id'] = the_pass.unique_id
-                    return HttpResponseRedirect('/form/')
+                    password_message = the_data['password_message']
+
             else:
-                password_message = 'Password is incorrect'
-        else:
-            login =LoginForm()
+                username_message = 'There was an error'
+
+
     else:
         login = LoginForm()
 
