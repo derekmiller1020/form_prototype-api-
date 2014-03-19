@@ -6,8 +6,7 @@ import uuid
 """For the purposes of this prototype Login and Registration share the same Model """
 
 class Login(models.Model):
-    #unique_id is now unnecessary, just here for previous testing in the admin
-    unique_id = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100) #not using an encryption for this prototype
 
@@ -32,7 +31,7 @@ class RegisterForm(ModelForm):
 
 
 class LoginAdmin(admin.ModelAdmin):
-    list_display = ('username', 'unique_id', 'password')
+    list_display = ('username', 'password')
 
 
 admin.site.register(Login, LoginAdmin)

@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 
+<h3>Login</h3>
 <form action="/login/" method="post"> {% csrf_token %}
 {{ login.as_p }}
 <input type="submit" value="Submit" />
 </form>
 
-{{ username_message }}
-{{ password_message }}
+<span class="label label-warning">{{ username_message }}</span>
+<span class="label label-warning">{{ password_message }}</span>
 
-</body>
-</html>
+{% endblock %}

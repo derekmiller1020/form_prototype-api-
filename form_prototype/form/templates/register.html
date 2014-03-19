@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Register</h3>
+<form action="/register/" method="post"> {% csrf_token %}
+{{ register.as_p }}
+<input type="submit" value="Submit" />
+</form>
+<span class="label label-success">{{ success_message }}</span>
+<span class="label label-warning">{{ register_message }}</span>
+
+
+{% endblock %}
