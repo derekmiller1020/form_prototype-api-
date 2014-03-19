@@ -1,10 +1,10 @@
 import pika
 
-class RabbitMq(object):
+class Rabbit(object):
 
     def __init__(self, new_data):
 
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.56.101'))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='sender')
 

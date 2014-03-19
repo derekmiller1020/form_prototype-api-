@@ -4,6 +4,8 @@ from models import FormPost, PostingForm, LoginForm, Login, RegisterForm
 import requests
 import json
 from django.template import loader, Context, RequestContext
+from Rabbit.rabbit import Rabbit
+from the_variables import *
 
 def register_post(request):
 
@@ -21,7 +23,7 @@ def register_post(request):
         if register.is_valid():
 
             #define variables to send to api
-            url = 'http://127.0.0.1:5000/register/'
+            url = REGISTER_URL
             the_data = {'username': username, 'password': password}
 
             #send data
@@ -67,8 +69,8 @@ def login_post(request):
 
         if login.is_valid():
 
-            url = "http://127.0.0.1:5000/login/"
-            the_data = {'username': str(username), 'password': str(password)}
+            url = LOGIN_URL
+            the_data = {'username': username, 'password': password}
 
             r = requests.post(url, data=the_data)
             status = r.status_code
@@ -102,11 +104,39 @@ def login_post(request):
 
 def form_post(request):
 
+    response_message = ''
+
     if 'user_id' in request.session:
         if request.method == 'POST':
             form = PostingForm(request.POST)
+            name = request.POST.get('name')
+            food = request.POST.get('food')
+            music = request.POST.get('music')
+            movie = request.POST.get('movie')
+            book = request.POST.get('book')
+            poem = request.POST.get('poem')
+            quote = request.POST.get('quote')
+
             if form.is_valid():
-                form.save()
+
+                url = FORM_URL
+                the_data = {'unique_id': request.session['user_id'], 'name': name, 'food': food, 'music': music,
+                            'movie': movie, 'book': book, 'poem': poem, 'quote': quote}
+
+                r = requests.post(url, data=the_data)
+                status = r.status_code
+                the_text = r.text
+
+                the_data = json.loads(r.text)
+
+                if 'success' in the_data:
+                    if the_data['success'] == 'True':
+                        response_message = 'Your information has been added'
+                    else:
+                        response_message = 'Unknown error. Sorry'
+                else:
+                    response_message = 'blllaaaahhhh'
+
         else:
             form = PostingForm()
 
@@ -115,6 +145,7 @@ def form_post(request):
 
     return render(request, 'logic.html', {
         'form': form,
+        'response_message': response_message
     })
 
 def logout(request):
