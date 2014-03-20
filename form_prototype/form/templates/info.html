@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Your DATA</h3>
-<h4>Full Name:</h4> {{ full_name }} <br>
-<h4>Music: </h4> {{ music }} <br>
-<h4>Movie: </h4> {{ movie }} <br>
-<h4>Food: </h4> {{ food }} <br>
-<h4>Poem: </h4> {{ poem }} <br>
-<h4>Quote: </h4> {{ quote }} <br>
-<h4>Book: </h4> {{ book }}
+<h1>Your Personal Info</h1>
+<div class = "row">
+<div class = "span12 offset2">
+<h3><b>Full Name:</b></h3> &emsp;&emsp;{{ full_name }} <br>
+<h4>Music: </h4> &emsp; &emsp;{{ music }} <br>
+<h4>Movie: </h4> &emsp;&emsp;{{ movie }} <br>
+<h4>Food: </h4> &emsp;&emsp;{{ food }} <br>
+<h4>Poem: </h4> &emsp;&emsp;{{ poem }} <br>
+<h4>Quote: </h4> &emsp;&emsp;{{ quote }} <br>
+<h4>Book: </h4> &emsp;&emsp;{{ book }}
+</div>
+</div>
 
 {% endblock %}

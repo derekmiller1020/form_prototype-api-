@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Main Form Elements</h3>
-<span class="label label-success">{{ response_message }}</span>
+<pre>
+<div class="row">
+<div class="span12">
+<h1>Main Form Elements</h1>
+<div class="span8 offset1">
+<form action="/form/" class="form-horizontal"  method="post"> {% csrf_token %}
 
-<form action="/form/"  method="post"> {% csrf_token %}
   {{ form.as_p }}
 <input type="submit" value="Submit" />
-</form>
 
+</form>
+</div>
+</div>
+</div>
+<span class="label label-success">{{ response_message }}</span>
+</pre>
 {% endblock %}

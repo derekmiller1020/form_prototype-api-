@@ -52,7 +52,12 @@ class PostingForm(ModelForm):
     class Meta:
         model = FormPost
         widgets = {
-            'food': forms.Textarea(attrs={'cols': 100, 'rows': 20, 'style': 'width:400'})
+            'food': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
+            'music': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
+            'movie': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
+            'book': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
+            'poem': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
+            'quote': forms.Textarea(attrs={'style': "width: 500px", 'rows': 10, }),
         }
         fields = ['name', 'food', 'music', 'movie', 'book', 'poem', 'quote']
 
