@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div class = "row">
+<div class="span4 offset4">
+<br>
 <h3>Register</h3>
+<pre>
 <form action="/register/" method="post"> {% csrf_token %}
 {{ register.as_p }}
 <input type="submit" value="Submit" />
 </form>
+</pre>
 <span class="label label-success">{{ success_message }}</span>
 <span class="label label-warning">{{ register_message }}</span>
-
+</div>
+</div>
 
 {% endblock %}

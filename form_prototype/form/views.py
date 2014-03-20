@@ -148,6 +148,51 @@ def form_post(request):
         'response_message': response_message
     })
 
+def display_data(request):
+
+    book = ""
+    movie = ""
+    full_name = ""
+    food = ""
+    music = ""
+    poem = ""
+    quote = ""
+    display_it = ''
+
+    if 'user_id' in request.session:
+        url = 'http://127.0.0.1:5000/pullform/%s' % request.session['user_id']
+
+        r = requests.get(url)
+        the_data = json.loads(r.text)
+
+        if 'full_name' in the_data:
+            book = the_data['book']
+            movie = the_data['movie']
+            full_name = the_data['full_name']
+            food = the_data['food']
+            music = the_data['music']
+            poem = the_data['poem']
+            quote = the_data['quote']
+
+        else:
+            display_it = "We couldn't find any data"
+
+    else:
+        return HttpResponseRedirect('/login/')
+
+    return render(request, 'info.html', {
+        'the_data': the_data,
+        'display_it': display_it,
+        'book': book,
+        'full_name': full_name,
+        'movie': movie,
+        'food': food,
+        'music': music,
+        'poem': poem,
+        'quote': quote,
+    })
+
+
 def logout(request):
 
     login_message = ''

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib import admin
-from django.forms import ModelForm, PasswordInput
+from django.forms import ModelForm, PasswordInput, Textarea, forms
 import uuid
 
 """For the purposes of this prototype Login and Registration share the same Model """
@@ -51,6 +51,9 @@ class PostingForm(ModelForm):
 
     class Meta:
         model = FormPost
+        widgets = {
+            'food': forms.Textarea(attrs={'cols': 100, 'rows': 20, 'style': 'width:400'})
+        }
         fields = ['name', 'food', 'music', 'movie', 'book', 'poem', 'quote']
 
 

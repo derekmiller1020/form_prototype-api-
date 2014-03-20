@@ -2,9 +2,10 @@
 {% block content %}
 <h3>Main Form Elements</h3>
 <span class="label label-success">{{ response_message }}</span>
-       <form action="/form/" class="form form-horizontal" method="post"> {% csrf_token %}
-            {{ form.as_p }}
-       <input type="submit" value="Submit" />
-       </form>
+
+<form action="/form/"  method="post"> {% csrf_token %}
+  {{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
 
 {% endblock %}

@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^login/', 'form.views.login_post', name="login_post"),
     url(r'^register/', 'form.views.register_post', name="register_post"),
     url(r'^logout/', 'form.views.logout', name="logout"),
+    url(r'^info/', 'form.views.display_data', name="display_data"),
 )

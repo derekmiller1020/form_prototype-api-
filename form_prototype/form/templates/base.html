@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <style>
+          #book {
+            cols: '80'
+          }
+      </style>
     <title>DEREK MILLER's REALLY BAD FORM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -13,26 +18,29 @@
   <div class="navbar-inner">
     <a class="brand" href="#">Derek Miller's API</a>
     <ul class="nav">
-      <li><a href="/form/">Home</a></li>
+      <li><a href="/info/">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Personal Info
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="/info/">User Info</a></li>
+            <li><a href="/form/">Edit/Add Data</a></li>
+        </ul>
+    </li>
       <li><a href="/login/">Login</a></li>
       <li><a href="/register/">Register</a></li>
       <li><a href="/logout/">Logout</a></li>
+
     </ul>
   </div>
 </div>
-
-<div class = "row">
-<div class="span12 offset 7">
-<pre>
     {% block content %}
     {% endblock %}
-</pre>
-</div>
 </div>
     <script src="{% static "bootstrap/js/jquery.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-</div>
-
 
   </body>
 </html>
