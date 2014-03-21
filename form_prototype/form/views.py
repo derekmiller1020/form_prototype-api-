@@ -232,7 +232,6 @@ def user_profile(request):
 
         if 'full_name' in the_data:
 
-            the_stuff = the_data
             book = the_data['book']
             movie = the_data['movie']
             full_name = the_data['full_name']
