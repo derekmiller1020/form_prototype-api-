@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'^register/', 'form.views.register_post', name="register_post"),
     url(r'^logout/', 'form.views.logout', name="logout"),
     url(r'^info/', 'form.views.display_data', name="display_data"),
+    url(r'^users/', 'form.views.users', name="users"),
+    url(r'^user_profile/', 'form.views.user_profile', name="user_profile"),
 )

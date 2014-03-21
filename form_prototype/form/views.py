@@ -192,6 +192,75 @@ def display_data(request):
         'quote': quote,
     })
 
+def users(request):
+
+    message = ""
+    username = ""
+    unique_id = ""
+
+    r = requests.get(USERS_URL)
+    the_text = json.loads(r.text)
+
+    if 'message' in the_text:
+        message = the_text['message']
+
+    else:
+        username = the_text
+
+    return render(request, 'users.html', {
+        'message': message,
+        'username': username,
+        'unique_id': unique_id,
+    })
+
+def user_profile(request):
+
+    book = ""
+    movie = ""
+    full_name = ""
+    food = ""
+    music = ""
+    poem = ""
+    quote = ""
+    message = ""
+
+    if 'id' in request.GET:
+
+        new_url = 'http://127.0.0.1:5000/pullform/%s' % request.GET['id']
+        r = requests.get(new_url)
+        the_data = json.loads(r.text)
+
+        if 'full_name' in the_data:
+
+            the_stuff = the_data
+            book = the_data['book']
+            movie = the_data['movie']
+            full_name = the_data['full_name']
+            food = the_data['food']
+            music = the_data['music']
+            poem = the_data['poem']
+            quote = the_data['quote']
+
+        else:
+            message = "sorry, we don't have data on that person"
+
+        if 'name' in request.GET:
+            username = request.GET['name']
+
+    else:
+        return HttpResponseRedirect('/users/')
+
+
+    return render(request, 'user_profile.html', {
+        'message': message,
+        'book': book,
+        'full_name': full_name,
+        'movie': movie,
+        'food': food,
+        'music': music,
+        'poem': poem,
+        'quote': quote,
+    })
 
 def logout(request):
 

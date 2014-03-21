@@ -4,7 +4,7 @@ class Rabbit(object):
 
     def __init__(self, new_data):
 
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.56.101'))
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='127.0.0.1'))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='sender')
 

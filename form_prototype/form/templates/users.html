@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class = "row">
+<div class = "span12 offset1">
+<h1>USERS:</h1>
+<div class="span8 offset1">
+{% for users in username %}
+    <a href="http://127.0.0.1:8000/user_profile?id={{ users.unique_id }}"><h2>{{ users.username }}</h2></a>
+{% endfor %}
+
+</div>
+</div>
+</div>
+
+
+{% endblock %}
