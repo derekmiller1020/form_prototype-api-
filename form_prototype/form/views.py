@@ -160,7 +160,7 @@ def display_data(request):
     display_it = ''
 
     if 'user_id' in request.session:
-        url = 'http://127.0.0.1:5000/pullform/%s' % request.session['user_id']
+        url = 'http://192.168.56.101:5000/pullform/%s' % request.session['user_id']
 
         r = requests.get(url)
         the_data = json.loads(r.text)
@@ -226,7 +226,7 @@ def user_profile(request):
 
     if 'id' in request.GET:
 
-        new_url = 'http://127.0.0.1:5000/pullform/%s' % request.GET['id']
+        new_url = 'http://192.168.56.101:5000/pullform/%s' % request.GET['id']
         r = requests.get(new_url)
         the_data = json.loads(r.text)
 
