@@ -1,5 +1,9 @@
 import pika
 
+"""
+THIS IS NOT BEING USED YET. IF I ADD A INSTANT MESSAGING SYSTEM, I WILL USE THIS
+"""
+
 class Rabbit(object):
 
     def __init__(self, new_data):

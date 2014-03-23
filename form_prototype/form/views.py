@@ -4,7 +4,6 @@ from models import FormPost, PostingForm, LoginForm, Login, RegisterForm
 import requests
 import json
 from django.template import loader, Context, RequestContext
-from Rabbit.rabbit import Rabbit
 from the_variables import *
 
 def register_post(request):
@@ -28,8 +27,6 @@ def register_post(request):
 
             #send data
             r = requests.post(url, data=the_data)
-            status = r.status_code
-            the_text = r.text
 
             #load data into dictionary
             the_data = json.loads(r.text)
@@ -73,8 +70,6 @@ def login_post(request):
             the_data = {'username': username, 'password': password}
 
             r = requests.post(url, data=the_data)
-            status = r.status_code
-            the_text = r.text
 
             the_data = json.loads(r.text)
 
@@ -124,8 +119,6 @@ def form_post(request):
                             'movie': movie, 'book': book, 'poem': poem, 'quote': quote}
 
                 r = requests.post(url, data=the_data)
-                status = r.status_code
-                the_text = r.text
 
                 the_data = json.loads(r.text)
 
@@ -243,9 +236,6 @@ def user_profile(request):
         else:
             message = "sorry, we don't have data on that person"
 
-        if 'name' in request.GET:
-            username = request.GET['name']
-
     else:
         return HttpResponseRedirect('/users/')
 
@@ -269,6 +259,7 @@ def logout(request):
     if request.session.get('has_conn', False):
         if request.session['has_conn'] == True:
             login_message = 'you are logged in'
+
         else:
             login_message = 'you are not logged in'
 
@@ -277,6 +268,7 @@ def logout(request):
 
         if request.session.get('has_conn', False):
             logout_message = 'Something went wrong'
+
         else:
             logout_message = 'You are officially logged out'
 
