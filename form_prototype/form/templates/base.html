@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <style>
-          #book {
-            cols: '80'
-          }
-      </style>
     <title>DEREK MILLER's REALLY BAD FORM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -30,9 +25,17 @@
             <li><a href="/users/">Users</a></li>
         </ul>
     </li>
-      <li><a href="/login/">Login</a></li>
-      <li><a href="/register/">Register</a></li>
-      <li><a href="/logout/">Logout</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Login/Logout
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="/login/">Login</a></li>
+            <li><a href="/register/">Register</a></li>
+            <li><a href="/logout/">Logout</a></li>
+        </ul>
+    </li>
 
     </ul>
   </div>
